@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+
+<robot name="pi">
+
+    <!-- Grey material with RGBA color (0.7, 0.7, 0.7, 1) -->
+    <material name="grey">
+        <color rgba="0.7 0.7 0.7 1"/>
+    </material>
+
+    <!-- Green material with RGBA color (0, 0.6, 0, 1) -->
+    <material name="green">
+        <color rgba="0 0.6 0 1"/>
+    </material>
+
+    <!-- White material with transparent RGBA color (0, 0, 0, 0) -->
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <!-- Blue material with RGBA color (0, 0, 1, 1) -->
+    <material name="blue">
+        <color rgba="0 0 1 1"/>
+    </material>
+
+    <!-- Red material with RGBA color (1, 0, 0, 1) -->
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <!-- Yellow material with RGBA color (1, 1, 0, 1) -->
+    <material name="yellow">
+        <color rgba="1 1 0 1"/>
+    </material>
+
+    <!-- Chassis link -->
+    <link name="base_link"></link>
+
+    <link name="chassis">
+        <visual>
+            <geometry>
+                <box size="0.3 0.3 0.15"/>
+            </geometry>
+            <material name="white"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </visual>
+    </link>
+    
+    <joint name="base_chassis_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="0 0 0.095" rpy="0 0 0"/>
+    </joint>
+
+    <!-- Left wheel link -->
+    <link name="left_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.04"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="chassis_leftwheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel_link"/>
+        <origin xyz="0 0.175 0.04" rpy="-1.5708 0 0"/> <!-- Use radians for angles, pi/2 is equal to 1.5708 radians -->
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- Right wheel link -->
+    <link name="right_wheel_link">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.04"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="chassis_rightwheel_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel_link"/>
+        <origin xyz="0 -0.175 0.04" rpy="1.5708 0 0"/> <!-- Use radians for angles, pi/2 is equal to 1.5708 radians -->
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="front_castor">
+        <visual>
+            <geometry>
+                <sphere radius ="0.02"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="front_castor_joint" type ="fixed">
+        <parent link="chassis"/>
+        <child link="front_castor"/>
+        <origin xyz = "0.10 0 -0.075" />
+    </joint>
+
+    <link name="rear_castor">
+        <visual>
+            <geometry>
+                <sphere radius ="0.02"/>
+            </geometry>
+            <material name="white"/>
+        </visual>
+    </link>
+
+    <joint name="rear_castor_joint" type ="fixed">
+        <parent link="chassis"/>
+        <child link="rear_castor"/>
+        <origin xyz = "-0.10 0 -0.075" />
+    </joint>
+
+    <!-- Lidar link -->
+    <!-- <link name="lidar">
+        <visual>
+            <geometry>
+                <cylinder length="0.05" radius="0.1"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="white"/>
+        </visual>
+    </link> -->
+
+</robot>
